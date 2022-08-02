@@ -42,7 +42,9 @@ class FragmentSecond : Fragment() {
         val sign= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
+            .requestProfile()
             .build()
+
         googleSignInClient= GoogleSignIn.getClient(requireActivity(),sign)
 
         binding.signOut.setOnClickListener{
@@ -58,6 +60,7 @@ class FragmentSecond : Fragment() {
 
         binding.email.text = firebaseAuth.currentUser?.uid
         binding.password.text = firebaseAuth.currentUser?.email
+
 
         return binding.root
     }

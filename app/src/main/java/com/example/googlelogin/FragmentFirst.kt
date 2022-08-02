@@ -51,9 +51,9 @@ class FragmentFirst : Fragment() {
         val sign = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
-            .requestProfile()
             .build()
 
+        //
         googleSignInClient = GoogleSignIn.getClient(requireActivity(),sign)
         binding.SignInBtn.setOnClickListener{
             signInGoogle()
@@ -72,9 +72,12 @@ class FragmentFirst : Fragment() {
             result ->
         Log.e(javaClass.simpleName, "result.resultCode : ${result.resultCode}!!!")
         Log.e(javaClass.simpleName, "RESULT_OK : $RESULT_OK", )
+
         if (result.resultCode == RESULT_OK)
         {
             val task=GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            Log.e(javaClass.simpleName, "result.data : ${result.data}")
+            Log.e(javaClass.simpleName, "task : $task")
             handleResult(task)
         }
         else{
